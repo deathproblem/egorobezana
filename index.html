@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Egor OS 98 — Mogging & Sub 3 Edition</title>
+  <title>Egor OS 98 — Obezana & Brainrot Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -63,6 +63,7 @@
       grid-auto-rows: 110px;
       gap: 1rem;
       align-content: flex-start;
+      overflow-y: auto;
     }
 
     .desktop-icon {
@@ -166,7 +167,7 @@
       align-items: center;
       padding: 3px 6px;
       gap: 6px;
-      z-index: 100;
+      z-index: 1000;
     }
 
     .start-btn {
@@ -214,7 +215,7 @@
       background: var(--win-gray);
       display: none;
       flex-direction: column;
-      z-index: 101;
+      z-index: 1001;
       box-shadow: 4px -4px 12px rgba(0,0,0,0.4);
     }
 
@@ -265,9 +266,50 @@
       border-bottom-color: white;
     }
 
-    /* ========================================= */
-    /* 🤫🧏 НОВЫЙ МОДУЛЬ: Я ТЕБЯ МОГНУ (MOG BATTLE) */
-    /* ========================================= */
+    /* Flying Bananas */
+    .flying-banana {
+      position: fixed;
+      font-size: 2.5rem;
+      pointer-events: none;
+      z-index: 9999;
+      animation: dropBanana 1.5s forwards ease-in;
+    }
+
+    @keyframes dropBanana {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Soundboard Grid */
+    .sound-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .sound-btn {
+      padding: 0.75rem 0.5rem;
+      background: var(--win-gray);
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .sound-btn:hover {
+      background: #dfdfdf;
+    }
+
+    .sound-btn:active {
+      border: 1px solid #000;
+      border-right-color: white;
+      border-bottom-color: white;
+    }
+
+    /* Mog Arena */
     .mog-arena {
       background: #09090b;
       border: 2px solid #27272a;
@@ -378,15 +420,9 @@
       font-size: 3rem;
       letter-spacing: 4px;
       z-index: 50;
-      animation: fadeIn 0.2s forwards;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* 1. Looksmaxxing: True Adam vs Sub 3 */
+    /* Looksmaxxing */
     .adam-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -426,7 +462,7 @@
       padding: 2px 0;
     }
 
-    /* 2. Воздухан 2000 */
+    /* Воздухан */
     .air-container {
       display: flex;
       flex-direction: column;
@@ -437,7 +473,6 @@
     .fan-rotor {
       font-size: 4rem;
       display: inline-block;
-      transition: transform 0.1s linear;
     }
 
     .fan-spinning {
@@ -471,7 +506,6 @@
       pointer-events: none;
       animation: floatAir 1.2s forwards ease-out;
       z-index: 100;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
     @keyframes floatAir {
@@ -479,7 +513,6 @@
       100% { opacity: 0; transform: translateY(-70px) scale(1.15); }
     }
 
-    /* 3. Духометр & Симулятор */
     .duho-gauge {
       width: 100%;
       height: 26px;
@@ -577,22 +610,40 @@
 
   <!-- BSOD -->
   <div class="bsod" id="bsod" onclick="closeBSOD()">
-    <div class="bsod-title">EGOR_GET_MOGGED_0x0000BYE_BYE</div>
-    <p>КРИТИЧЕСКОЕ ПОРАЖЕНИЕ В МОГГИНГ-ДУЭЛИ.</p>
+    <div class="bsod-title">EGOR_OBEZANA_FATAL_ERROR_0x000BANANA</div>
+    <p>КРИТИЧЕСКИЙ СБОЙ В БИОМЕТРИИ ЕГОРА.</p>
     <br>
-    <p>* Причина: Егор подошёл к зеркалу и громко заявил: «Я тебя могну!».</p>
-    <p>* Зеркало ответило мгновенным гига-моггингом. Уровень ауры Егора: -999,999,999.</p>
-    <p>* Звучит трек: Bye Bye... 🤫🧏</p>
+    <p>* Причина: В организме обнаружено 99.8% ДНК дикой макаки.</p>
+    <p>* Мотивация вернуть долг: 0x00000000 (НЕ НАЙДЕНА).</p>
+    <p>* Егор попытался сказать фразу без слова «отвечаю», процессор сгорел.</p>
     <br>
-    <p>Нажмите ЛЮБУЮ КЛАВИШУ, чтобы выйти из позора...</p>
+    <p>Кликните мышью, чтобы дать обезьяне банан и перезагрузиться...</p>
   </div>
 
   <canvas class="snow-overlay" id="snowCanvas"></canvas>
 
-  <!-- Рабочий стол с иконками -->
+  <!-- Рабочий стол -->
   <div class="desktop" id="desktop">
 
-    <!-- СВЕЖИЙ ХИТ: Я ТЕБЯ МОГНУ -->
+    <!-- 1. НОВИНКА: OBEZANA.EXE (в честь названия репозитория) -->
+    <div class="desktop-icon" onclick="openWindow('win-monkey')">
+      <div class="icon-img">🐒</div>
+      <span>Obezana.exe</span>
+    </div>
+
+    <!-- 2. НОВИНКА: ДОЛГИ ЕГОРА -->
+    <div class="desktop-icon" onclick="openWindow('win-debt')">
+      <div class="icon-img">💸</div>
+      <span>Долги Егора</span>
+    </div>
+
+    <!-- 3. НОВИНКА: МЕМ-САУНДБОРД -->
+    <div class="desktop-icon" onclick="openWindow('win-board')">
+      <div class="icon-img">🔊</div>
+      <span>Мем-Саундборд</span>
+    </div>
+
+    <!-- Я ТЕБЯ МОГНУ -->
     <div class="desktop-icon" onclick="openWindow('win-mog')">
       <div class="icon-img">🤫</div>
       <span>Я ТЕБЯ МОГНУ</span>
@@ -610,29 +661,19 @@
       <span>Воздухан.exe</span>
     </div>
 
-    <div class="desktop-icon" onclick="openWindow('win-excuses')">
-      <div class="icon-img">🎰</div>
-      <span>Отмазки Егора</span>
-    </div>
-
     <div class="desktop-icon" onclick="openWindow('win-duho')">
       <div class="icon-img">💨</div>
       <span>Духометр 3000</span>
     </div>
 
+    <div class="desktop-icon" onclick="openWindow('win-excuses')">
+      <div class="icon-img">🎰</div>
+      <span>Отмазки</span>
+    </div>
+
     <div class="desktop-icon" onclick="openWindow('win-sim')">
       <div class="icon-img">🎮</div>
       <span>День Егора</span>
-    </div>
-
-    <div class="desktop-icon" onclick="openWindow('win-promises')">
-      <div class="icon-img">📁</div>
-      <span>Мои обещания</span>
-    </div>
-
-    <div class="desktop-icon" onclick="openWindow('win-trash')">
-      <div class="icon-img">🗑️</div>
-      <span>Корзина</span>
     </div>
 
     <div class="desktop-icon" onclick="triggerBSOD()">
@@ -642,19 +683,138 @@
 
   </div>
 
+  <!-- ОКНО 1: OBEZANA.EXE (Тест на примата) -->
+  <div class="window bevel-out" id="win-monkey" style="top: 40px; left: 130px; width: 480px;">
+    <div class="window-header" onmousedown="bringToFront('win-monkey')">
+      <div class="win-title"><span>🐒</span> OBEZANA.EXE — Экспертиза происхождения Егора</div>
+      <div class="win-controls">
+        <button class="win-btn" onclick="closeWindow('win-monkey')">✕</button>
+      </div>
+    </div>
+    <div class="window-content" style="text-align: center;">
+      <div style="font-size: 3.5rem; margin-bottom: 0.5rem;" id="monkeyIcon">🐒</div>
+      <h3 style="color: #78350f; font-weight: 900; margin-bottom: 0.5rem;">АНАЛИЗ ДНК «EGOROBEZANA»</h3>
+      
+      <div class="bevel-in" style="padding: 0.75rem; text-align: left; font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.75rem;">
+        <div>🧬 ДНК человека разумного: <b style="color: #ef4444;">1.2%</b></div>
+        <div>🍌 ДНК дикой макаки-бананоеда: <b style="color: #eab308;">98.8%</b></div>
+        <div>🧠 Объём мозга: <i>Размером с грецкий орех</i></div>
+        <div>🔊 Основной язык общения: <i>«У-У-У А-А-А Э-Э-Э»</i></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="open-window-btn bevel-out" style="background: #eab308; color: black; margin: 0;" onclick="feedBanana()">
+          🍌 Бросить банан в Егора
+        </button>
+        <button class="open-window-btn bevel-out" style="background: #84cc16; color: black; margin: 0;" onclick="monkeyScreech()">
+          📣 Врубить крик обезьяны!
+        </button>
+      </div>
+      <p id="bananaLog" style="font-size: 0.8rem; color: #475569; margin-top: 0.5rem; min-height: 1.2rem;">
+        Нажмите кнопку, чтобы покормить примата.
+      </p>
+    </div>
+  </div>
+
+  <!-- ОКНО 2: ДОЛГИ ЕГОРА (Калькулятор 'Завтра верну') -->
+  <div class="window bevel-out" id="win-debt" style="top: 90px; left: 220px; width: 460px;">
+    <div class="window-header" onmousedown="bringToFront('win-debt')">
+      <div class="win-title"><span>💸</span> Калькулятор «КОГДА ЕГОР ВЕРНЁТ СОТКУ»</div>
+      <div class="win-controls">
+        <button class="win-btn" onclick="closeWindow('win-debt')">✕</button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700;">Сколько Егор у тебя занял (рублей):</label>
+          <input type="number" id="debtAmount" value="250" class="bevel-in" style="width: 100%; padding: 0.4rem; font-size: 1rem; font-weight: 700;">
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700;">Какую отмазку он сказал:</label>
+          <select id="debtExcuse" class="bevel-in" style="width: 100%; padding: 0.4rem; font-size: 0.85rem;">
+            <option>«Завтра точно переведу, брат»</option>
+            <option>«Карту заблокировали, жду перевыпуск»</option>
+            <option>«Сейчас крипту на P2P выведу и закину»</option>
+            <option>«У меня интернет-банк глючит»</option>
+          </select>
+        </div>
+
+        <button class="open-window-btn bevel-out" style="background: #ef4444; color: white; margin: 0;" onclick="calcDebt()">
+          🧮 Рассчитать реальную дату возврата
+        </button>
+
+        <div class="bevel-in" id="debtResult" style="padding: 0.75rem; font-size: 0.85rem; line-height: 1.5; color: #1e293b; background: #fff;">
+          <b>Прогноз аналитиков:</b> Шанс возврата денег: <b>0.00001%</b>.<br>
+          Ориентировочная дата возврата: <b>14 сентября 2099 года</b>.<br>
+          <span style="color: #ef4444; font-weight: 700;">Вердикт: Можешь попрощаться с деньгами.</span>
+        </div>
+
+        <button class="action-btn bevel-out" onclick="callEgor()">
+          📞 Позвонить Егору и спросить про долг
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ОКНО 3: BRAINROT САУНДБОРД ЕГОРА -->
+  <div class="window bevel-out" id="win-board" style="top: 130px; left: 310px; width: 420px;">
+    <div class="window-header" onmousedown="bringToFront('win-board')">
+      <div class="win-title"><span>🔊</span> TikTok Brainrot Саундборд Егора</div>
+      <div class="win-controls">
+        <button class="win-btn" onclick="closeWindow('win-board')">✕</button>
+      </div>
+    </div>
+    <div class="window-content">
+      <p style="font-size: 0.8rem; color: #475569; margin-bottom: 0.75rem;">
+        Нажмите на звук, чтобы воспроизвести любимые звуковые эффекты Егора:
+      </p>
+
+      <div class="sound-grid">
+        <button class="sound-btn bevel-out" onclick="playMogBeat()">
+          <span>🤫🧏</span>
+          <span>«Bye Bye / Мог»</span>
+        </button>
+
+        <button class="sound-btn bevel-out" onclick="monkeyScreech()">
+          <span>🐒🍌</span>
+          <span>«Крик Примата»</span>
+        </button>
+
+        <button class="sound-btn bevel-out" onclick="playWhooshSound()">
+          <span>🌪️💨</span>
+          <span>«Воздухан Turbo»</span>
+        </button>
+
+        <button class="sound-btn bevel-out" onclick="playPhonkCowbell()">
+          <span>🗿🔊</span>
+          <span>«True Adam Phonk»</span>
+        </button>
+
+        <button class="sound-btn bevel-out" onclick="playClownHonk()">
+          <span>🤡🎺</span>
+          <span>«Клоунский Гудок»</span>
+        </button>
+
+        <button class="sound-btn bevel-out" onclick="playSnoreSound()">
+          <span>💤🛋️</span>
+          <span>«Храп на парах»</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ОКНО: «Я ТЕБЯ МОГНУ» (MOG BATTLE 1v1) -->
-  <div class="window bevel-out" id="win-mog" style="top: 50px; left: 140px; width: 540px;">
+  <div class="window bevel-out" id="win-mog" style="top: 60px; left: 160px; width: 540px;">
     <div class="window-header" onmousedown="bringToFront('win-mog')">
-      <div class="win-title"><span>🤫🧏</span> MOG BATTLE: «Я ТЕБЯ МОГНУ!» [TikTok Edit 1998]</div>
+      <div class="win-title"><span>🤫🧏</span> MOG BATTLE: «Я ТЕБЯ МОГНУ!»</div>
       <div class="win-controls">
         <button class="win-btn" onclick="closeWindow('win-mog')">✕</button>
       </div>
     </div>
     <div class="window-content">
-      
       <div class="mog-arena" id="mogArena">
-        
-        <!-- Оверлей BYE BYE -->
         <div class="bye-bye-overlay" id="byeByeOverlay">
           <div>🤫 BYE BYE... 🧏</div>
           <div style="font-size: 1.4rem; color: #f87171; margin-top: 0.5rem;">ЕГОР БЫЛ ЖЕСТОКО ЗАМОГАН</div>
@@ -665,10 +825,7 @@
           <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Статус: Мьюинг активирован 🤫🧏</span>
         </div>
 
-        <!-- Дуэль -->
         <div class="mog-duel-view">
-          
-          <!-- Егор -->
           <div class="fighter-card" id="cardEgor">
             <div class="fighter-avatar" id="avatarEgor">🤡</div>
             <div style="font-weight: 900; font-size: 0.95rem; color: #fca5a5;">ЕГОР</div>
@@ -678,17 +835,14 @@
 
           <div class="vs-badge">VS</div>
 
-          <!-- Соперник -->
           <div class="fighter-card" id="cardOpp">
             <div class="fighter-avatar" id="avatarOpp">🗿</div>
             <div style="font-weight: 900; font-size: 0.95rem; color: #38bdf8;" id="oppName">ТЫ (ГИГАЧАД)</div>
             <div style="font-size: 0.75rem; color: #4ade80; font-weight: 700;">Mogger Tier: God</div>
             <div style="font-size: 0.7rem; color: #a1a1aa;" id="oppDesc">Jawline: 100/10</div>
           </div>
-
         </div>
 
-        <!-- Mog Meter -->
         <div class="mog-meter-box">
           <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700;">
             <span style="color: #ef4444;">Аура Егора: <span id="egorScore">4%</span></span>
@@ -703,84 +857,62 @@
           </div>
         </div>
 
-        <!-- Кнопки дуэли -->
         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
           <div style="display: flex; gap: 0.5rem;">
             <button class="open-window-btn bevel-out" style="margin: 0; background: #ef4444; color: white;" onclick="triggerEgorMogAttempt()">
-              🗣️ «Я ТЕБЯ МОГНУ!» (Крик Егора)
+              🗣️ «Я ТЕБЯ МОГНУ!»
             </button>
             <button class="open-window-btn bevel-out" style="margin: 0; background: #38bdf8; color: black;" onclick="triggerGigaMog()">
-              🤫 BYE BYE... (Замогать Егора)
+              🤫 BYE BYE...
             </button>
           </div>
 
-          <!-- Выбор соперника -->
           <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; margin-top: 0.25rem;">
             <span style="color: #a1a1aa;">Кого ещё Егор пытался могнуть:</span>
             <select id="rivalSelect" onchange="changeRival()" style="background: #27272a; color: white; border: 1px solid #3f3f46; padding: 2px 6px; border-radius: 4px;">
               <option value="user">Ты (Пользователь)</option>
-              <option value="cat">Кот Мурзик 🐱</option>
+              <option value="cat">Кот Мурзик 😼</option>
               <option value="fridge">Холодильник Атлант 🧊</option>
               <option value="artem">Артём Дурак 🤪</option>
               <option value="shawarma">Шаурма на вокзале 🌯</option>
             </select>
           </div>
         </div>
-
       </div>
-
     </div>
   </div>
 
   <!-- ОКНО: True Adam vs Sub 3 -->
   <div class="window bevel-out" id="win-adam" style="top: 80px; left: 200px; width: 500px;">
     <div class="window-header" onmousedown="bringToFront('win-adam')">
-      <div class="win-title"><span>🗿</span> TikTok Looksmaxxing Analyzer: True Adam vs Sub 3</div>
+      <div class="win-title"><span>🗿</span> TikTok Looksmaxxing: True Adam vs Sub 3</div>
       <div class="win-controls">
         <button class="win-btn" onclick="closeWindow('win-adam')">✕</button>
       </div>
     </div>
     <div class="window-content">
-      <p style="margin-bottom: 0.75rem; font-weight: 700; color: #1e293b;">
-        🔍 Сканирование лицевых параметров Егора по стандартам ТикТока:
-      </p>
-
       <div class="adam-grid">
-        <!-- Кем Егор себя считает -->
         <div class="adam-card adam-card-hero">
           <div style="font-size: 2.2rem;">🗿</div>
           <div style="font-weight: 900; font-size: 0.95rem; color: #38bdf8;">TRUE ADAM</div>
-          <div style="font-size: 0.75rem; color: #94a3b8;">(В мечтах Егора)</div>
           <div class="param-list">
             <div class="param-row"><span>Canthal Tilt:</span> <b style="color: #4ade80;">+15° Positive</b></div>
             <div class="param-row"><span>Jawline:</span> <b style="color: #4ade80;">Режет стекло</b></div>
             <div class="param-row"><span>Eyes:</span> <b style="color: #4ade80;">Hunter Eyes</b></div>
-            <div class="param-row"><span>Аура:</span> <b style="color: #4ade80;">100,000,000</b></div>
           </div>
         </div>
 
-        <!-- Кем Егор является -->
         <div class="adam-card adam-card-egor">
           <div style="font-size: 2.2rem;">💀</div>
           <div style="font-weight: 900; font-size: 0.95rem; color: #f87171;">HARD SUB 3</div>
-          <div style="font-size: 0.75rem; color: #fca5a5;">(Суровая реальность)</div>
           <div class="param-list">
             <div class="param-row"><span>Canthal Tilt:</span> <b style="color: #ef4444;">-60° Жертва</b></div>
             <div class="param-row"><span>Jawline:</span> <b style="color: #ef4444;">Слился с шеей</b></div>
-            <div class="param-row"><span>Eyes:</span> <b style="color: #ef4444;">Сонный лемур</b></div>
             <div class="param-row"><span>Осанка:</span> <b style="color: #ef4444;">Креветка 🦐</b></div>
           </div>
         </div>
       </div>
-
-      <div class="bevel-in" style="padding: 0.75rem; font-size: 0.85rem; line-height: 1.4; color: #334155; margin-bottom: 0.75rem;">
-        <b>Вердикт лаборатории:</b> Бро реально думает, что он <i>True Adam</i> из фонк-эдитов, когда на деле он безнадёжный <b>Sub 3</b>. Мьюинг не поможет, кости черепа объявили забастовку.
-      </div>
-
-      <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
-        <button class="action-btn bevel-out" onclick="playPhonkCowbell()">Врубить фонк-эдит 🔊</button>
-        <button class="action-btn bevel-out" onclick="startMewingTest()">Экстренный Мьюинг 🤫🧏</button>
-      </div>
+      <button class="action-btn bevel-out" onclick="playPhonkCowbell()">Врубить фонк-эдит 🔊</button>
     </div>
   </div>
 
@@ -793,26 +925,16 @@
       </div>
     </div>
     <div class="window-content">
-      <p style="margin-bottom: 0.5rem; font-size: 0.85rem; color: #475569;">
-        Егор обещает прийти, затащить, вернуть долг и начать бизнес. Нажмите кнопку, чтобы помочь Егору <b>гонять воздух</b>:
-      </p>
-
       <div class="air-container">
         <div class="fan-rotor" id="fanRotor">🌀</div>
         <div class="air-counter bevel-in" id="airCounter">0 м³ ВОЗДУХА</div>
       </div>
-
       <p id="airRank" style="font-weight: 800; color: #0284c7; text-align: center; margin: 0.75rem 0 0.5rem; font-size: 0.9rem;">
         Звание: Начинающий сквозняк
       </p>
-
-      <button class="open-window-btn bevel-out" id="pumpAirBtn" style="background: #38bdf8; color: #082f49;" onclick="pumpAir(event)">
+      <button class="open-window-btn bevel-out" style="background: #38bdf8; color: #082f49;" onclick="pumpAir(event)">
         💨 ГОНЯТЬ ВОЗДУХ! (Сотрясать атмосферу)
       </button>
-
-      <div class="bevel-in" id="airLog" style="margin-top: 0.75rem; height: 80px; overflow-y: auto; padding: 0.5rem; font-size: 0.8rem; color: #1e293b;">
-        > Егор только что сотряс воздух фразой: «Да я в соло затащу, отвечаю»...<br>
-      </div>
     </div>
   </div>
 
@@ -825,13 +947,10 @@
       </div>
     </div>
     <div class="window-content">
-      <p style="margin-bottom: 0.75rem; color: #475569;">Почему Егор не вышел на связь:</p>
       <div class="excuse-box bevel-in" id="excuseDisplay">
         «Я уже обуваюсь и выхожу!» <br><small style="color: #64748b;">(На самом деле лежит под тремя одеялами и смотрит рилсы)</small>
       </div>
-      <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
-        <button class="action-btn bevel-out" onclick="generateExcuse()">Сгенерировать отмазку 🎲</button>
-      </div>
+      <button class="action-btn bevel-out" onclick="generateExcuse()">Сгенерировать отмазку 🎲</button>
     </div>
   </div>
 
@@ -844,12 +963,11 @@
       </div>
     </div>
     <div class="window-content">
-      <p><b>Текущий уровень духоты от замечаний Егора:</b></p>
       <div class="duho-gauge bevel-in">
         <div class="duho-bar" id="duhoBar"></div>
       </div>
       <p id="duhoText" style="color: #b91c1c; font-weight: 700; font-size: 0.85rem;">
-        🚨 КРИТИЧЕСКИЙ УРОВЕНЬ: Егор начал умничать и спорить о правилах.
+        🚨 КРИТИЧЕСКИЙ УРОВЕНЬ: Егор начал спорить о правилах.
       </p>
       <button class="open-window-btn bevel-out" onclick="toggleWindowVentilation()">
         🪟 СРОЧНО ОТКРЫТЬ ФОРТОЧКУ! (Проветрить)
@@ -873,8 +991,8 @@
         <div class="stat-pill bevel-in" id="statMood">🛋️ Состояние: Лежит</div>
       </div>
 
-      <div class="bevel-in" id="simLog" style="padding: 0.75rem; height: 100px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 0.75rem; line-height: 1.4; color: #1e293b;">
-        > 14:30: Егор открыл один глаз, посмотрел на будильник и глубоко вздохнул.<br>
+      <div class="bevel-in" id="simLog" style="padding: 0.75rem; height: 90px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 0.75rem; line-height: 1.4; color: #1e293b;">
+        > 14:30: Егор открыл один глаз, посмотрел на будильник и вздохнул.<br>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
@@ -886,42 +1004,6 @@
     </div>
   </div>
 
-  <!-- ОКНО: Папка «Мои обещания» -->
-  <div class="window bevel-out" id="win-promises" style="top: 200px; left: 160px; width: 380px;">
-    <div class="window-header" onmousedown="bringToFront('win-promises')">
-      <div class="win-title"><span>📁</span> C:\Users\Egor\Мои обещания</div>
-      <div class="win-controls">
-        <button class="win-btn" onclick="closeWindow('win-promises')">✕</button>
-      </div>
-    </div>
-    <div class="window-content" style="text-align: center; padding: 2rem 1rem;">
-      <div style="font-size: 3rem; margin-bottom: 0.5rem;">🕸️</div>
-      <p style="font-weight: 700; font-size: 1rem; color: #334155;">Папка пуста</p>
-      <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">
-        Ни одного сдержанного слова не найдено. Чистейший вакуум.
-      </p>
-    </div>
-  </div>
-
-  <!-- ОКНО: Корзина Егора -->
-  <div class="window bevel-out" id="win-trash" style="top: 180px; left: 400px; width: 360px;">
-    <div class="window-header" onmousedown="bringToFront('win-trash')">
-      <div class="win-title"><span>🗑️</span> Корзина Егора</div>
-      <div class="win-controls">
-        <button class="win-btn" onclick="closeWindow('win-trash')">✕</button>
-      </div>
-    </div>
-    <div class="window-content">
-      <p style="margin-bottom: 0.5rem; font-weight: 700;">Удалённые объекты:</p>
-      <ul style="list-style-type: none; font-size: 0.85rem; line-height: 1.8; color: #334155;">
-        <li>❌ Попытка стать True Adam.mp4</li>
-        <li>❌ Попытка кого-то могнуть (Mogged.rip)</li>
-        <li>❌ Положительный canthal tilt.psd</li>
-        <li>❌ Нормальный режим сна.exe</li>
-      </ul>
-    </div>
-  </div>
-
   <!-- Панель задач -->
   <div class="taskbar bevel-out">
     <button class="start-btn bevel-out" id="startBtn" onclick="toggleStartMenu()">
@@ -930,10 +1012,10 @@
     </button>
     <div class="taskbar-divider"></div>
     <div style="font-size: 0.8rem; color: #475569; font-weight: 600;">
-      EgorOS v98.3 • «Я ТЕБЯ МОГНУ» Edition • Bye Bye... 🤫🧏
+      EgorOS v98.4 • Obezana Edition 🐒 • 100% Воздухан
     </div>
     <div class="taskbar-tray bevel-in">
-      <span>🤫 MOG</span>
+      <span>🍌 98%</span>
       <span id="taskbarClock">14:00</span>
     </div>
   </div>
@@ -943,20 +1025,20 @@
     <div style="display: flex;">
       <div class="start-sidebar">EGOR 98</div>
       <div class="start-items">
-        <div class="start-item" onclick="openWindow('win-mog'); toggleStartMenu();">
-          <span>🤫</span> Я ТЕБЯ МОГНУ (Mog Battle)
+        <div class="start-item" onclick="openWindow('win-monkey'); toggleStartMenu();">
+          <span>🐒</span> Obezana.exe (ДНК тест)
         </div>
-        <div class="start-item" onclick="openWindow('win-adam'); toggleStartMenu();">
-          <span>🗿</span> True Adam vs Sub 3
+        <div class="start-item" onclick="openWindow('win-debt'); toggleStartMenu();">
+          <span>💸</span> Долги Егора (Калькулятор)
+        </div>
+        <div class="start-item" onclick="openWindow('win-board'); toggleStartMenu();">
+          <span>🔊</span> Мем-Саундборд
+        </div>
+        <div class="start-item" onclick="openWindow('win-mog'); toggleStartMenu();">
+          <span>🤫</span> Я ТЕБЯ МОГНУ
         </div>
         <div class="start-item" onclick="openWindow('win-air'); toggleStartMenu();">
           <span>🌪️</span> Воздухан 2000
-        </div>
-        <div class="start-item" onclick="openWindow('win-excuses'); toggleStartMenu();">
-          <span>🎰</span> Генератор отмазок
-        </div>
-        <div class="start-item" onclick="openWindow('win-duho'); toggleStartMenu();">
-          <span>💨</span> Духометр 3000
         </div>
         <div style="height: 1px; background: #808080; margin: 4px 0;"></div>
         <div class="start-item" onclick="triggerBSOD(); toggleStartMenu();">
@@ -967,7 +1049,6 @@
   </div>
 
   <script>
-    // Web Audio FX
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playTone(freq, duration = 0.1, type = 'sine') {
@@ -984,37 +1065,106 @@
       osc.stop(audioCtx.currentTime + duration);
     }
 
-    // Heavy Bass Drop + Phonk Vibe for MOG / BYE BYE
-    function playMogBeat() {
+    // 1. Monkey Screech Synth (У-У-У А-А-А!)
+    function monkeyScreech() {
       if (audioCtx.state === 'suspended') audioCtx.resume();
       const now = audioCtx.currentTime;
+      [800, 1200, 900, 1400, 1600, 1100].forEach((freq, idx) => {
+        setTimeout(() => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(freq + 400, audioCtx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.12);
+        }, idx * 90);
+      });
 
-      // Sub-bass drop
-      const sub = audioCtx.createOscillator();
-      const subGain = audioCtx.createGain();
-      sub.type = 'sawtooth';
-      sub.frequency.setValueAtTime(140, now);
-      sub.frequency.exponentialRampToValueAtTime(35, now + 0.8);
-      subGain.gain.setValueAtTime(0.3, now);
-      subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-      sub.connect(subGain);
-      subGain.connect(audioCtx.destination);
-      sub.start(now);
-      sub.stop(now + 0.8);
-
-      // Distorted high chord
-      const cowbell = audioCtx.createOscillator();
-      const cbGain = audioCtx.createGain();
-      cowbell.type = 'square';
-      cowbell.frequency.setValueAtTime(587.33, now + 0.2);
-      cbGain.gain.setValueAtTime(0.15, now + 0.2);
-      cbGain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-      cowbell.connect(cbGain);
-      cbGain.connect(audioCtx.destination);
-      cowbell.start(now + 0.2);
-      cowbell.stop(now + 0.5);
+      document.getElementById('monkeyIcon').innerText = '🦍';
+      setTimeout(() => document.getElementById('monkeyIcon').innerText = '🐒', 700);
     }
 
+    // 2. Feed Banana (Бананопад)
+    function feedBanana() {
+      monkeyScreech();
+      document.getElementById('bananaLog').innerHTML = '🍌 <b>Егор жадно схватил банан и скрылся на дереве!</b> (ДНК макаки +5%)';
+      for (let i = 0; i < 15; i++) {
+        const b = document.createElement('div');
+        b.className = 'flying-banana';
+        b.innerText = '🍌';
+        b.style.left = `${Math.random() * 90}vw`;
+        b.style.animationDuration = `${1 + Math.random()}s`;
+        document.body.appendChild(b);
+        setTimeout(() => b.remove(), 2000);
+      }
+    }
+
+    // 3. Clown Honk
+    function playClownHonk() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      [440, 587.33].forEach(freq => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.2);
+      });
+    }
+
+    // 4. Snore sound
+    function playSnoreSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(80, audioCtx.currentTime);
+      osc.frequency.linearRampToValueAtTime(140, audioCtx.currentTime + 0.4);
+      osc.frequency.linearRampToValueAtTime(70, audioCtx.currentTime + 0.8);
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.8);
+    }
+
+    // 5. Debt Calculator
+    function calcDebt() {
+      playTone(500, 0.1);
+      const sum = document.getElementById('debtAmount').value || 100;
+      const excuse = document.getElementById('debtExcuse').value;
+      const res = document.getElementById('debtResult');
+
+      const years = [2067, 2088, 2099, 2142];
+      const randYear = years[Math.floor(Math.random() * years.length)];
+
+      res.innerHTML = `
+        💸 <b>Сумма долга:</b> ${sum} ₽<br>
+        🗣️ <b>Оправдание:</b> <i>«${excuse}»</i><br>
+        ⏳ <b>Реальная дата возврата:</b> 32 мая ${randYear} года.<br>
+        <span style="color: #ef4444; font-weight: 800;">Статус: Егор уже забыл, что брал у тебя деньги.</span>
+      `;
+    }
+
+    function callEgor() {
+      playTone(425, 0.4);
+      setTimeout(() => playTone(425, 0.4), 600);
+      setTimeout(() => {
+        alert('📞 АВТООТВЕТЧИК ЕГОРА: «Абонент сейчас занят важным делом — лежит на диване и гоняет воздух. Перезвоните никогда».');
+      }, 1200);
+    }
+
+    // Phonk Cowbell
     function playPhonkCowbell() {
       if (audioCtx.state === 'suspended') audioCtx.resume();
       const notes = [587.33, 587.33, 880.00, 783.99, 698.46];
@@ -1032,6 +1182,22 @@
           osc.stop(audioCtx.currentTime + 0.22);
         }, idx * 160);
       });
+    }
+
+    function playMogBeat() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const now = audioCtx.currentTime;
+      const sub = audioCtx.createOscillator();
+      const subGain = audioCtx.createGain();
+      sub.type = 'sawtooth';
+      sub.frequency.setValueAtTime(140, now);
+      sub.frequency.exponentialRampToValueAtTime(35, now + 0.8);
+      subGain.gain.setValueAtTime(0.3, now);
+      subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+      sub.connect(subGain);
+      subGain.connect(audioCtx.destination);
+      sub.start(now);
+      sub.stop(now + 0.8);
     }
 
     function playWhooshSound() {
@@ -1055,9 +1221,7 @@
       const bufferSize = audioCtx.sampleRate * 2;
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
-      }
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
       const noise = audioCtx.createBufferSource();
       noise.buffer = buffer;
       const filter = audioCtx.createBiquadFilter();
@@ -1072,7 +1236,7 @@
       noise.start();
     }
 
-    // Windows management
+    // Windows
     let highestZ = 20;
 
     function openWindow(id) {
@@ -1092,7 +1256,7 @@
       document.getElementById(id).style.zIndex = highestZ;
     }
 
-    // Dragging windows
+    // Draggable windows
     document.querySelectorAll('.window').forEach(win => {
       const header = win.querySelector('.window-header');
       let isDragging = false, startX, startY, initLeft, initTop;
@@ -1124,9 +1288,7 @@
       });
     });
 
-    // ===================================
-    // 🤫🧏 ЛОГИКА «Я ТЕБЯ МОГНУ»
-    // ===================================
+    // Mog Duel
     const rivals = {
       user: { name: "ТЫ (ГИГАЧАД)", avatar: "🗿", desc: "Jawline: 100/10 • Осанка титана", score: 98 },
       cat: { name: "КОТ МУРЗИК", avatar: "😼", desc: "Природный positive canthal tilt", score: 92 },
@@ -1141,21 +1303,8 @@
       document.getElementById('oppName').innerText = r.name;
       document.getElementById('avatarOpp').innerText = r.avatar;
       document.getElementById('oppDesc').innerText = r.desc;
-      resetMogCards();
     }
 
-    function resetMogCards() {
-      document.getElementById('cardEgor').className = 'fighter-card';
-      document.getElementById('cardOpp').className = 'fighter-card';
-      document.getElementById('avatarEgor').classList.remove('mewing-active');
-      document.getElementById('barEgor').style.width = '4%';
-      document.getElementById('barOpp').style.width = '96%';
-      document.getElementById('egorScore').innerText = '4%';
-      document.getElementById('oppScore').innerText = '96%';
-      document.getElementById('mogVerdict').innerText = 'Егор собирается с силами, чтобы кого-то могнуть...';
-    }
-
-    // 1. Попытка Егора могнуть
     function triggerEgorMogAttempt() {
       playTone(300, 0.2, 'sawtooth');
       const avatarEgor = document.getElementById('avatarEgor');
@@ -1171,20 +1320,14 @@
       }
 
       document.getElementById('mogVerdict').innerHTML = '🗣️ Егор кричит: <i>«Я ТЕБЯ МОГНУ!»</i> и делает яростный мьюинг...';
-
-      // Через секунду — полный провал
-      setTimeout(() => {
-        triggerGigaMog();
-      }, 1200);
+      setTimeout(() => triggerGigaMog(), 1200);
     }
 
-    // 2. Жестокий ответный МОГГИНГ (BYE BYE)
     function triggerGigaMog() {
       playMogBeat();
       const sel = document.getElementById('rivalSelect').value;
       const r = rivals[sel];
 
-      // Оверлей BYE BYE
       const overlay = document.getElementById('byeByeOverlay');
       overlay.style.display = 'flex';
 
@@ -1198,7 +1341,6 @@
 
       setTimeout(() => {
         overlay.style.display = 'none';
-
         const cardEgor = document.getElementById('cardEgor');
         const cardOpp = document.getElementById('cardOpp');
         cardEgor.className = 'fighter-card mogged-loser';
@@ -1212,26 +1354,18 @@
         document.getElementById('egorScore').innerText = `${egorPercent}%`;
         document.getElementById('oppScore').innerText = `${oppPercent}%`;
 
-        document.getElementById('mogVerdict').innerHTML = `💀 <b>MOGGED!</b> Соперник (<b>${r.name}</b>) стёр Егора в порошок одним взглядом охотника. Егор официально отправлен в нокаут.`;
+        document.getElementById('mogVerdict').innerHTML = `💀 <b>MOGGED!</b> Соперник (<b>${r.name}</b>) стёр Егора в порошок одним взглядом.`;
       }, 1400);
     }
 
-    // Мьюинг тест
-    function startMewingTest() {
-      playTone(400, 0.1);
-      alert('🤫🧏 Егор прижал язык к нёбу на 2 секунды, устал, зевнул и вернулся к состоянию Sub 3.');
-    }
-
-    // ВОЗДУХАН 2000
+    // Воздухан
     let airMeters = 0;
     const airPhrases = [
       "«Я завтра точно приду, зуб даю!»",
       "«Да я в соло эту катку затащу!»",
       "«Сейчас пятихатку скину, подожди минуту»",
       "«У меня через неделю свой бизнес будет»",
-      "«Да я на изи эту тему сдам, там делать нечего»",
-      "«Я уже в лифте спускаюсь (лежит в кровати)»",
-      "«Сто процентов инфа, мне пацаны сказали»"
+      "«Да я на изи эту тему сдам, там делать нечего»"
     ];
 
     function pumpAir(e) {
@@ -1251,19 +1385,9 @@
       document.body.appendChild(bubble);
       setTimeout(() => bubble.remove(), 1200);
 
-      const log = document.getElementById('airLog');
-      log.innerHTML = `> Егор прогнал ${airMeters}м³ воздуха: ${bubble.innerText}<br>` + log.innerHTML;
-
       const rank = document.getElementById('airRank');
-      if (airMeters > 500) {
-        rank.innerText = 'Звание: 🌪️ ГЕНЕРАЛ-МАЙОР ОЗОНОВОЙ ДЫРЫ И ПУСТОСЛОВИЯ';
-        rank.style.color = '#ef4444';
-      } else if (airMeters > 200) {
-        rank.innerText = 'Звание: 💨 Заслуженный Воздухан района';
-        rank.style.color = '#f59e0b';
-      } else if (airMeters > 80) {
-        rank.innerText = 'Звание: 🌬️ Стабильный сквозняк';
-      }
+      if (airMeters > 200) rank.innerText = 'Звание: 🌪️ ГЕНЕРАЛ-МАЙОР ПУСТОСЛОВИЯ';
+      else if (airMeters > 80) rank.innerText = 'Звание: 💨 Заслуженный Воздухан района';
     }
 
     // Start Menu
@@ -1289,89 +1413,50 @@
       }
     });
 
-    // Отмазки Егора
+    // Отмазки
     const excuses = [
-      "«Я уже почти подъезжаю!» (Егор ещё даже трусы не надел).",
-      "«У меня кот нажал на мышку и удалил весь мой дискорд».",
-      "«Ребят, у меня сегодня сильные магнитные бури прямо в комнате».",
-      "«Я случайно моргнул и проспал 4 часа, сорян».",
-      "«Я бы сделал, но звёзды в гороскопе говорят: сегодня день чилла».",
-      "«Меня затянула черная дыра в ленте TikTok, спасите».",
-      "«У меня чайник закипает, отойду на секунду» (пропал на 3 суток)."
+      "«Я уже почти подъезжаю!» (Егор ещё в кровати).",
+      "«У меня кот удалил весь мой дискорд».",
+      "«Сильные магнитные бури прямо в комнате».",
+      "«Я случайно моргнул и проспал 4 часа, сорян»."
     ];
 
     function generateExcuse() {
       playTone(700, 0.1, 'sawtooth');
-      const text = excuses[Math.floor(Math.random() * excuses.length)];
-      document.getElementById('excuseDisplay').innerHTML = text;
+      document.getElementById('excuseDisplay').innerHTML = excuses[Math.floor(Math.random() * excuses.length)];
     }
 
-    // Духометр & Форточка
+    // Духометр
     function toggleWindowVentilation() {
       playWindSound();
       const canvas = document.getElementById('snowCanvas');
       canvas.classList.add('snow-active');
-
-      const bar = document.getElementById('duhoBar');
-      const text = document.getElementById('duhoText');
-
-      bar.style.width = '15%';
-      text.style.color = '#0284c7';
-      text.innerText = '❄️ ФОРТОЧКА ОТКРЫТА НАСТЕЖЬ! Свежий морозный воздух спас ситуацию!';
-
       startSnow();
+      document.getElementById('duhoBar').style.width = '15%';
+      document.getElementById('duhoText').innerText = '❄️ ФОРТОЧКА ОТКРЫТА! Свежий воздух спас положение!';
 
       setTimeout(() => {
         canvas.classList.remove('snow-active');
         stopSnow();
-        bar.style.width = '96%';
-        text.style.color = '#b91c1c';
-        text.innerText = '🚨 Егор снова зашёл в комнату и закрыл форточку со словами: "Дует вообще-то".';
-      }, 4500);
+        document.getElementById('duhoBar').style.width = '96%';
+        document.getElementById('duhoText').innerText = '🚨 Егор снова закрыл форточку со словами: "Дует вообще-то".';
+      }, 4000);
     }
 
-    // Симулятор Дня Егора
-    let simHour = 14;
-    let simMin = 30;
-    let energy = 12;
-    let done = 0;
-
+    // Симулятор
+    let simHour = 14, simMin = 30, energy = 12, done = 0;
     function simAction(action) {
       playTone(500, 0.08);
       const log = document.getElementById('simLog');
       let msg = "";
-
-      if (action === 'sleep') {
-        simMin += 45;
-        energy = Math.max(0, energy - 2);
-        msg = `> ${formatTime()}: Поспал «5 минут». Прошло 45 минут. Проснулся ещё более уставшим.`;
-      } else if (action === 'phone') {
-        simHour += 2;
-        energy = Math.max(0, energy - 5);
-        msg = `> ${formatTime()}: Зашёл посмотреть тиктоки про True Adam и моггинг — залип на 2 часа.`;
-      } else if (action === 'eat') {
-        simMin += 30;
-        energy += 10;
-        msg = `> ${formatTime()}: Поел шаурму. Жизнь налаживается, но работать теперь точно нельзя.`;
-      } else if (action === 'work') {
-        triggerBSOD();
-        return;
-      }
+      if (action === 'sleep') { simMin += 45; energy = Math.max(0, energy - 2); msg = `> Поспал ещё «5 минут». Прошло 45 минут.`; }
+      else if (action === 'phone') { simHour += 2; msg = `> Залип в тиктоки про True Adam на 2 часа.`; }
+      else if (action === 'eat') { simMin += 30; energy += 10; msg = `> Поел шаурму. Работать нельзя — надо переваривать.`; }
+      else if (action === 'work') { triggerBSOD(); return; }
 
       log.innerHTML += msg + "<br>";
       log.scrollTop = log.scrollHeight;
-
-      document.getElementById('statTime').innerText = `⏰ Время: ${formatTime()}`;
       document.getElementById('statEnergy').innerText = `⚡ Энергия: ${energy}%`;
-      document.getElementById('statDone').innerText = `📋 Сделано дел: ${done}`;
-    }
-
-    function formatTime() {
-      if (simMin >= 60) {
-        simHour += Math.floor(simMin / 60);
-        simMin = simMin % 60;
-      }
-      return `${String(simHour % 24).padStart(2, '0')}:${String(simMin).padStart(2, '0')}`;
     }
 
     // BSOD
@@ -1385,62 +1470,37 @@
       document.getElementById('bsod').style.display = 'none';
     }
 
-    // Snow animation
+    // Snow
     const canvas = document.getElementById('snowCanvas');
     const ctx = canvas.getContext('2d');
-    let flakes = [];
-    let snowAnimId = null;
+    let flakes = [], snowAnimId = null;
 
-    function resizeSnow() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
+    function resizeSnow() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener('resize', resizeSnow);
     resizeSnow();
 
     function startSnow() {
       flakes = [];
-      for (let i = 0; i < 90; i++) {
-        flakes.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 3 + 1,
-          speed: Math.random() * 3 + 2,
-          wind: Math.random() * 4 + 2
-        });
-      }
-      function drawSnow() {
+      for (let i = 0; i < 80; i++) flakes.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 3 + 1, speed: Math.random() * 3 + 2, wind: Math.random() * 4 + 2 });
+      function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
         ctx.beginPath();
-        for (let f of flakes) {
-          ctx.moveTo(f.x, f.y);
-          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-          f.y += f.speed;
-          f.x += f.wind;
-          if (f.y > canvas.height) f.y = 0;
-          if (f.x > canvas.width) f.x = 0;
-        }
+        for (let f of flakes) { ctx.moveTo(f.x, f.y); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2); f.y += f.speed; f.x += f.wind; if (f.y > canvas.height) f.y = 0; if (f.x > canvas.width) f.x = 0; }
         ctx.fill();
-        snowAnimId = requestAnimationFrame(drawSnow);
+        snowAnimId = requestAnimationFrame(draw);
       }
-      drawSnow();
+      draw();
     }
+    function stopSnow() { if (snowAnimId) cancelAnimationFrame(snowAnimId); ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
-    function stopSnow() {
-      if (snowAnimId) cancelAnimationFrame(snowAnimId);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    // Clock
     setInterval(() => {
       const now = new Date();
       document.getElementById('taskbarClock').innerText = now.toTimeString().split(' ')[0].slice(0, 5);
     }, 1000);
 
-    // Initial window display
     window.addEventListener('load', () => {
-      openWindow('win-mog');
+      openWindow('win-monkey');
     });
   </script>
 </body>
