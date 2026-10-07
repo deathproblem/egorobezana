@@ -1065,33 +1065,50 @@
       osc.stop(audioCtx.currentTime + duration);
     }
 
-    // 1. Monkey Screech Synth (У-У-У А-А-А!)
-    function monkeyScreech() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const now = audioCtx.currentTime;
-      [800, 1200, 900, 1400, 1600, 1100].forEach((freq, idx) => {
-        setTimeout(() => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(freq + 400, audioCtx.currentTime + 0.12);
-          gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 0.12);
-        }, idx * 90);
-      });
+    // Реальные звуки из интернета
+    const audioFiles = {
+      byebye: new Audio('sounds/byebye.mp3'),
+      vineBoom: new Audio('sounds/vine-boom.mp3'),
+      monkey: new Audio('sounds/monkey.mp3'),
+      phonk: new Audio('sounds/phonk.mp3'),
+      clown: new Audio('sounds/clown.mp3'),
+      snore: new Audio('sounds/snore.mp3'),
+      wind: new Audio('sounds/wind.mp3'),
+      error: new Audio('sounds/error.mp3')
+    };
 
-      document.getElementById('monkeyIcon').innerText = '🦍';
-      setTimeout(() => document.getElementById('monkeyIcon').innerText = '🐒', 700);
+    function playSoundFile(name, restart = true) {
+      try {
+        const sound = audioFiles[name];
+        if (sound) {
+          if (restart) sound.currentTime = 0;
+          sound.play().catch(e => console.log('Audio autoplay prevented:', e));
+        }
+      } catch (err) {
+        console.error(err);
+      }
     }
 
-    // 2. Feed Banana (Бананопад)
+    function stopSoundFile(name) {
+      try {
+        const sound = audioFiles[name];
+        if (sound) {
+          sound.pause();
+          sound.currentTime = 0;
+        }
+      } catch (err) {}
+    }
+
+    // 1. Обезьяний крик
+    function monkeyScreech() {
+      playSoundFile('monkey');
+      document.getElementById('monkeyIcon').innerText = '🦍';
+      setTimeout(() => document.getElementById('monkeyIcon').innerText = '🐒', 1000);
+    }
+
+    // 2. Бананопад
     function feedBanana() {
-      monkeyScreech();
+      playSoundFile('monkey');
       document.getElementById('bananaLog').innerHTML = '🍌 <b>Егор жадно схватил банан и скрылся на дереве!</b> (ДНК макаки +5%)';
       for (let i = 0; i < 15; i++) {
         const b = document.createElement('div');
@@ -1104,43 +1121,19 @@
       }
     }
 
-    // 3. Clown Honk
+    // 3. Клоунский гудок
     function playClownHonk() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      [440, 587.33].forEach(freq => {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.2);
-      });
+      playSoundFile('clown');
     }
 
-    // 4. Snore sound
+    // 4. Храп
     function playSnoreSound() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(80, audioCtx.currentTime);
-      osc.frequency.linearRampToValueAtTime(140, audioCtx.currentTime + 0.4);
-      osc.frequency.linearRampToValueAtTime(70, audioCtx.currentTime + 0.8);
-      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.8);
+      playSoundFile('snore');
     }
 
-    // 5. Debt Calculator
+    // 5. Калькулятор долга
     function calcDebt() {
-      playTone(500, 0.1);
+      playSoundFile('error');
       const sum = document.getElementById('debtAmount').value || 100;
       const excuse = document.getElementById('debtExcuse').value;
       const res = document.getElementById('debtResult');
@@ -1160,80 +1153,27 @@
       playTone(425, 0.4);
       setTimeout(() => playTone(425, 0.4), 600);
       setTimeout(() => {
+        playSoundFile('vineBoom');
         alert('📞 АВТООТВЕТЧИК ЕГОРА: «Абонент сейчас занят важным делом — лежит на диване и гоняет воздух. Перезвоните никогда».');
       }, 1200);
     }
 
-    // Phonk Cowbell
+    // 6. Phonk
     function playPhonkCowbell() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const notes = [587.33, 587.33, 880.00, 783.99, 698.46];
-      notes.forEach((freq, idx) => {
-        setTimeout(() => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.22);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 0.22);
-        }, idx * 160);
-      });
+      playSoundFile('phonk');
     }
 
+    // 7. Mog Beat & Vine Boom
     function playMogBeat() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const now = audioCtx.currentTime;
-      const sub = audioCtx.createOscillator();
-      const subGain = audioCtx.createGain();
-      sub.type = 'sawtooth';
-      sub.frequency.setValueAtTime(140, now);
-      sub.frequency.exponentialRampToValueAtTime(35, now + 0.8);
-      subGain.gain.setValueAtTime(0.3, now);
-      subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-      sub.connect(subGain);
-      subGain.connect(audioCtx.destination);
-      sub.start(now);
-      sub.stop(now + 0.8);
+      playSoundFile('byebye');
     }
 
     function playWhooshSound() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.1);
-      osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.25);
-      gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.25);
+      playSoundFile('wind');
     }
 
     function playWindSound() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const bufferSize = audioCtx.sampleRate * 2;
-      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-      const noise = audioCtx.createBufferSource();
-      noise.buffer = buffer;
-      const filter = audioCtx.createBiquadFilter();
-      filter.type = 'bandpass';
-      filter.frequency.value = 400;
-      const gain = audioCtx.createGain();
-      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2);
-      noise.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-      noise.start();
+      playSoundFile('wind');
     }
 
     // Windows
@@ -1249,6 +1189,9 @@
     function closeWindow(id) {
       playTone(320, 0.08, 'square');
       document.getElementById(id).style.display = 'none';
+      if (id === 'win-adam') stopSoundFile('phonk');
+      if (id === 'win-mog') stopSoundFile('byebye');
+      if (id === 'win-monkey') stopSoundFile('monkey');
     }
 
     function bringToFront(id) {
@@ -1324,20 +1267,13 @@
     }
 
     function triggerGigaMog() {
-      playMogBeat();
+      playSoundFile('vineBoom');
+      playSoundFile('byebye');
       const sel = document.getElementById('rivalSelect').value;
       const r = rivals[sel];
 
       const overlay = document.getElementById('byeByeOverlay');
       overlay.style.display = 'flex';
-
-      if ('speechSynthesis' in window) {
-        const u = new SpeechSynthesisUtterance('Бай бай...');
-        u.lang = 'ru-RU';
-        u.pitch = 0.6;
-        u.rate = 0.8;
-        window.speechSynthesis.speak(u);
-      }
 
       setTimeout(() => {
         overlay.style.display = 'none';
@@ -1355,7 +1291,7 @@
         document.getElementById('oppScore').innerText = `${oppPercent}%`;
 
         document.getElementById('mogVerdict').innerHTML = `💀 <b>MOGGED!</b> Соперник (<b>${r.name}</b>) стёр Егора в порошок одним взглядом.`;
-      }, 1400);
+      }, 1600);
     }
 
     // Воздухан
@@ -1369,7 +1305,7 @@
     ];
 
     function pumpAir(e) {
-      playWhooshSound();
+      playSoundFile('wind');
       airMeters += Math.floor(Math.random() * 25) + 15;
       document.getElementById('airCounter').innerText = `${airMeters.toLocaleString()} м³ ВОЗДУХА`;
 
@@ -1422,13 +1358,13 @@
     ];
 
     function generateExcuse() {
-      playTone(700, 0.1, 'sawtooth');
+      playSoundFile('clown');
       document.getElementById('excuseDisplay').innerHTML = excuses[Math.floor(Math.random() * excuses.length)];
     }
 
     // Духометр
     function toggleWindowVentilation() {
-      playWindSound();
+      playSoundFile('wind');
       const canvas = document.getElementById('snowCanvas');
       canvas.classList.add('snow-active');
       startSnow();
@@ -1438,6 +1374,7 @@
       setTimeout(() => {
         canvas.classList.remove('snow-active');
         stopSnow();
+        stopSoundFile('wind');
         document.getElementById('duhoBar').style.width = '96%';
         document.getElementById('duhoText').innerText = '🚨 Егор снова закрыл форточку со словами: "Дует вообще-то".';
       }, 4000);
@@ -1446,13 +1383,24 @@
     // Симулятор
     let simHour = 14, simMin = 30, energy = 12, done = 0;
     function simAction(action) {
-      playTone(500, 0.08);
       const log = document.getElementById('simLog');
       let msg = "";
-      if (action === 'sleep') { simMin += 45; energy = Math.max(0, energy - 2); msg = `> Поспал ещё «5 минут». Прошло 45 минут.`; }
-      else if (action === 'phone') { simHour += 2; msg = `> Залип в тиктоки про True Adam на 2 часа.`; }
-      else if (action === 'eat') { simMin += 30; energy += 10; msg = `> Поел шаурму. Работать нельзя — надо переваривать.`; }
-      else if (action === 'work') { triggerBSOD(); return; }
+      if (action === 'sleep') { 
+        playSoundFile('snore');
+        simMin += 45; energy = Math.max(0, energy - 2); msg = `> Поспал ещё «5 минут». Прошло 45 минут.`; 
+      }
+      else if (action === 'phone') { 
+        playSoundFile('byebye');
+        simHour += 2; msg = `> Залип в тиктоки про True Adam на 2 часа.`; 
+      }
+      else if (action === 'eat') { 
+        playSoundFile('monkey');
+        simMin += 30; energy += 10; msg = `> Поел шаурму. Работать нельзя — надо переваривать.`; 
+      }
+      else if (action === 'work') { 
+        triggerBSOD(); 
+        return; 
+      }
 
       log.innerHTML += msg + "<br>";
       log.scrollTop = log.scrollHeight;
@@ -1461,7 +1409,8 @@
 
     // BSOD
     function triggerBSOD() {
-      playTone(150, 0.4, 'sawtooth');
+      playSoundFile('error');
+      setTimeout(() => playSoundFile('vineBoom'), 300);
       document.getElementById('bsod').style.display = 'flex';
     }
 
