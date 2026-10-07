@@ -1066,15 +1066,16 @@
     }
 
     // Реальные звуки из интернета
+    const soundDir = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'sounds/';
     const audioFiles = {
-      byebye: new Audio('sounds/byebye.mp3'),
-      vineBoom: new Audio('sounds/vine-boom.mp3'),
-      monkey: new Audio('sounds/monkey.mp3'),
-      phonk: new Audio('sounds/phonk.mp3'),
-      clown: new Audio('sounds/clown.mp3'),
-      snore: new Audio('sounds/snore.mp3'),
-      wind: new Audio('sounds/wind.mp3'),
-      error: new Audio('sounds/error.mp3')
+      byebye: new Audio(soundDir + 'byebye.mp3'),
+      vineBoom: new Audio(soundDir + 'vine-boom.mp3'),
+      monkey: new Audio(soundDir + 'monkey.mp3'),
+      phonk: new Audio(soundDir + 'phonk.mp3'),
+      clown: new Audio(soundDir + 'clown.mp3'),
+      snore: new Audio(soundDir + 'snore.mp3'),
+      wind: new Audio(soundDir + 'wind.mp3'),
+      error: new Audio(soundDir + 'error.mp3')
     };
 
     function playSoundFile(name, restart = true) {
