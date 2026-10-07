@@ -1065,35 +1065,72 @@
       osc.stop(audioCtx.currentTime + duration);
     }
 
-    // Реальные звуки из интернета (Обрезанные, мгновенные)
+    // Реальные звуки из интернета (Обрезанные, 100% защита от кэша браузера)
     function getSoundUrl(filename) {
-      return new URL('sounds/' + filename, window.location.href).href;
+      return new URL('sounds/' + filename + '?nocache=' + Date.now(), window.location.href).href;
     }
 
     const audioFiles = {
-      byebye: new Audio(getSoundUrl('byebye.mp3')),
-      vineBoom: new Audio(getSoundUrl('vine-boom.mp3')),
-      monkey: new Audio(getSoundUrl('monkey.mp3')),
-      phonk: new Audio(getSoundUrl('phonk.mp3')),
-      clown: new Audio(getSoundUrl('clown.mp3')),
-      snore: new Audio(getSoundUrl('snore.mp3')),
-      wind: new Audio(getSoundUrl('wind.mp3')),
-      error: new Audio(getSoundUrl('error.mp3'))
+      byebye: new Audio(getSoundUrl('byebye_v3.mp3')),
+      vineBoom: new Audio(getSoundUrl('vine-boom_v3.mp3')),
+      monkey: new Audio(getSoundUrl('monkey_v3.mp3')),
+      phonk: new Audio(getSoundUrl('phonk_v3.mp3')),
+      clown: new Audio(getSoundUrl('clown_v3.mp3')),
+      snore: new Audio(getSoundUrl('snore_v3.mp3')),
+      wind: new Audio(getSoundUrl('wind_v3.mp3')),
+      error: new Audio(getSoundUrl('error_v3.mp3'))
     };
+
+    // Лимит длительности звучания в миллисекундах (Жёсткий стоп)
+    const maxDurations = {
+      byebye: 5000,
+      monkey: 3500,
+      phonk: 6000,
+      wind: 3500,
+      clown: 2000,
+      snore: 4000,
+      error: 1200,
+      vineBoom: 1500
+    };
+
+    let activeTimers = {};
+
+    function stopAllSounds() {
+      Object.keys(audioFiles).forEach(key => {
+        try {
+          audioFiles[key].pause();
+          audioFiles[key].currentTime = 0;
+          if (activeTimers[key]) clearTimeout(activeTimers[key]);
+        } catch(e) {}
+      });
+    }
 
     function playSoundFile(name) {
       try {
         const sound = audioFiles[name];
         if (sound) {
+          // Останавливаем все другие треки, чтобы ничего не накладывалось
+          if (name !== 'vineBoom') {
+            stopAllSounds();
+          }
+
           sound.pause();
           sound.currentTime = 0;
+
           const promise = sound.play();
           if (promise !== undefined) {
             promise.catch(() => {
-              // Запасной вариант при блокировке браузером
               const temp = new Audio(sound.src);
               temp.play().catch(e => console.log('Playback error:', e));
             });
+          }
+
+          // Принудительный стоп по таймеру
+          if (maxDurations[name]) {
+            if (activeTimers[name]) clearTimeout(activeTimers[name]);
+            activeTimers[name] = setTimeout(() => {
+              stopSoundFile(name);
+            }, maxDurations[name]);
           }
         }
       } catch (err) {
@@ -1108,6 +1145,7 @@
           sound.pause();
           sound.currentTime = 0;
         }
+        if (activeTimers[name]) clearTimeout(activeTimers[name]);
       } catch (err) {}
     }
 
