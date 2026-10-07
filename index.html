@@ -1065,25 +1065,36 @@
       osc.stop(audioCtx.currentTime + duration);
     }
 
-    // Реальные звуки из интернета
-    const soundDir = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'sounds/';
+    // Реальные звуки из интернета (Обрезанные, мгновенные)
+    function getSoundUrl(filename) {
+      return new URL('sounds/' + filename, window.location.href).href;
+    }
+
     const audioFiles = {
-      byebye: new Audio(soundDir + 'byebye.mp3'),
-      vineBoom: new Audio(soundDir + 'vine-boom.mp3'),
-      monkey: new Audio(soundDir + 'monkey.mp3'),
-      phonk: new Audio(soundDir + 'phonk.mp3'),
-      clown: new Audio(soundDir + 'clown.mp3'),
-      snore: new Audio(soundDir + 'snore.mp3'),
-      wind: new Audio(soundDir + 'wind.mp3'),
-      error: new Audio(soundDir + 'error.mp3')
+      byebye: new Audio(getSoundUrl('byebye.mp3')),
+      vineBoom: new Audio(getSoundUrl('vine-boom.mp3')),
+      monkey: new Audio(getSoundUrl('monkey.mp3')),
+      phonk: new Audio(getSoundUrl('phonk.mp3')),
+      clown: new Audio(getSoundUrl('clown.mp3')),
+      snore: new Audio(getSoundUrl('snore.mp3')),
+      wind: new Audio(getSoundUrl('wind.mp3')),
+      error: new Audio(getSoundUrl('error.mp3'))
     };
 
-    function playSoundFile(name, restart = true) {
+    function playSoundFile(name) {
       try {
         const sound = audioFiles[name];
         if (sound) {
-          if (restart) sound.currentTime = 0;
-          sound.play().catch(e => console.log('Audio autoplay prevented:', e));
+          sound.pause();
+          sound.currentTime = 0;
+          const promise = sound.play();
+          if (promise !== undefined) {
+            promise.catch(() => {
+              // Запасной вариант при блокировке браузером
+              const temp = new Audio(sound.src);
+              temp.play().catch(e => console.log('Playback error:', e));
+            });
+          }
         }
       } catch (err) {
         console.error(err);
